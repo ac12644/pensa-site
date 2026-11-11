@@ -3,12 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pensa: your own head first</title>
-<meta name="description" content="Pensa: a few minutes a day where you do the thinking. Daily brain workout and real facts worth keeping. Free, no ads.">
+<title>Pensa: Brain Workout | Daily Memory &amp; Focus Training</title>
+<meta name="description" content="Pensa is a 5-minute daily brain workout for Android: memory, attention and reasoning exercises that adapt to you, plus real facts worth keeping. Free, no ads.">
 <meta name="theme-color" content="#5046E5">
+<link rel="canonical" href="https://pensaapp.com/">
+<link rel="alternate" hreflang="en" href="https://pensaapp.com/">
+<link rel="alternate" hreflang="it" href="https://pensaapp.com/it/">
+<link rel="alternate" hreflang="de" href="https://pensaapp.com/de/">
+<link rel="alternate" hreflang="x-default" href="https://pensaapp.com/">
+<link rel="icon" type="image/png" href="/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pensa">
+<meta property="og:title" content="Pensa: Brain Workout | Daily Memory &amp; Focus Training">
+<meta property="og:description" content="Pensa is a 5-minute daily brain workout for Android: memory, attention and reasoning exercises that adapt to you, plus real facts worth keeping. Free, no ads.">
+<meta property="og:url" content="https://pensaapp.com/">
+<meta property="og:image" content="https://pensaapp.com/og.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Pensa","operatingSystem":"Android","applicationCategory":"EducationalApplication","description":"Pensa is a 5-minute daily brain workout for Android: memory, attention and reasoning exercises that adapt to you, plus real facts worth keeping. Free, no ads.","url":"https://pensaapp.com/","image":"https://pensaapp.com/icon.png","inLanguage":["en","it","es","fr","de","pt"],"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
 <style>
   /* Self-hosted: no request leaves this site, so no cookie or font banner is needed. */
-  @font-face { font-family: Nunito; src: url("nunito.ttf") format("truetype"); font-weight: 200 1000; font-display: swap; }
+  @font-face { font-family: Nunito; src: url("/nunito.ttf") format("truetype"); font-weight: 200 1000; font-display: swap; }
   :root { --p: #5046E5; --p-lip: #3A31B8; --p-soft: #EEEDFD; --ok: #0C8069; --ok-lip: #08604F; --miss: #F0A020; --miss-lip: #8A5600;
           --text: #1F2333; --muted: #6B7090; --line: #E5E7EF; --line-lip: #D3D6E2; --bg: #FBFAFF; }
   * { box-sizing: border-box; }
@@ -35,8 +51,8 @@
   .brand { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 26px; letter-spacing: -.5px; text-decoration: none; }
   .brand svg { width: 44px; height: 44px; }
   .langs { display: flex; gap: 4px; background: #fff; border: 2px solid var(--line); border-radius: 999px; padding: 4px; }
-  .langs button { font: 800 13px Nunito, sans-serif; color: var(--muted); background: none; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
-  .langs button[aria-pressed="true"] { background: var(--p-soft); color: var(--p); }
+  .langs a { text-decoration: none; font: 800 13px Nunito, sans-serif; color: var(--muted); background: none; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+  .langs a[aria-current="true"] { background: var(--p-soft); color: var(--p); }
 
   main { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; padding: 8px 0 24px; }
   .copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
@@ -138,25 +154,25 @@
 
 <div class="page">
   <header>
-    <a class="brand" href="/"><svg aria-hidden="true"><use href="#lumi"/></svg>Pensa</a>
+    <a class="brand" href="https://pensaapp.com/"><svg aria-hidden="true"><use href="#lumi"/></svg>Pensa</a>
     <div class="langs" role="group" aria-label="Language">
-      <button data-lang="en">EN</button><button data-lang="it">IT</button><button data-lang="de">DE</button>
+      <a data-lang="en" href="/">EN</a><a data-lang="it" href="/it/">IT</a><a data-lang="de" href="/de/">DE</a>
     </div>
   </header>
 
   <main>
     <section class="copy">
-      <span class="eyebrow"><i></i><span data-t="eyebrow"></span></span>
-      <h1 data-t="h1"></h1>
-      <p class="lead" data-t="lead"></p>
-      <ul class="chips"><li data-t="chip1"></li><li data-t="chip2"></li><li data-t="chip3"></li></ul>
+      <span class="eyebrow"><i></i><span data-t="eyebrow">Closed beta · Android</span></span>
+      <h1 data-t="h1">Your own <em>head</em> first.</h1>
+      <p class="lead" data-t="lead">AI and your phone answer everything for you. Pensa gives you a few minutes a day where you do the thinking: short exercises that adapt to you, and real facts worth keeping.</p>
+      <ul class="chips"><li data-t="chip1">5 minutes a day</li><li data-t="chip2">6 languages</li><li data-t="chip3">Free daily training, no ads</li></ul>
       <div class="cta">
-        <a class="btn" href="https://groups.google.com/g/pensa-app-testers" target="_blank" rel="noopener" data-t="cta"></a>
-        <a class="btn ghost" href="#game" data-t="try"></a>
+        <a class="btn" href="https://groups.google.com/g/pensa-app-testers" target="_blank" rel="noopener" data-t="cta">Join the beta</a>
+        <a class="btn ghost" href="#game" data-t="try">Try a puzzle</a>
       </div>
       <div>
-        <p class="steps" data-t="steps"></p>
-        <p class="note" data-t="note"></p>
+        <p class="steps" data-t="steps">Two steps: join the <a href="https://groups.google.com/g/pensa-app-testers" target="_blank" rel="noopener">testers group</a>, then <a href="https://play.google.com/apps/testing/com.getpensa.app" target="_blank" rel="noopener">get it on Google Play</a>.</p>
+        <p class="note" data-t="note">A training app, not a medical test.</p>
       </div>
     </section>
 
@@ -174,41 +190,104 @@
   </main>
 
   <footer>
-    <a href="privacy-policy.html" data-t="privacy" data-anchor></a>
-    <a href="terms-of-sale.html" data-t="terms" data-anchor></a>
-    <a href="delete-account.html" data-t="del" data-anchor></a>
-    <a href="mailto:abhishekchauhan150@gmail.com" data-t="contact"></a>
+    <a href="/privacy-policy.html" data-t="privacy" data-anchor>Privacy policy</a>
+    <a href="/terms-of-sale.html" data-t="terms" data-anchor>Terms of sale</a>
+    <a href="/delete-account.html" data-t="del" data-anchor>Delete account</a>
+    <a href="mailto:abhishekchauhan150@gmail.com" data-t="contact">Contact</a>
   </footer>
 </div>
 
+<script type="application/json" id="strings">
+{
+ "en": {
+  "eyebrow": "Closed beta · Android",
+  "h1": "Your own <em>head</em> first.",
+  "lead": "AI and your phone answer everything for you. Pensa gives you a few minutes a day where you do the thinking: short exercises that adapt to you, and real facts worth keeping.",
+  "chip1": "5 minutes a day",
+  "chip2": "6 languages",
+  "chip3": "Free daily training, no ads",
+  "cta": "Join the beta",
+  "try": "Try a puzzle",
+  "steps": "Two steps: join the <a href=\"https://groups.google.com/g/pensa-app-testers\" target=\"_blank\" rel=\"noopener\">testers group</a>, then <a href=\"https://play.google.com/apps/testing/com.getpensa.app\" target=\"_blank\" rel=\"noopener\">get it on Google Play</a>.",
+  "note": "A training app, not a medical test.",
+  "privacy": "Privacy policy",
+  "terms": "Terms of sale",
+  "del": "Delete account",
+  "contact": "Contact",
+  "intro": "Remember which tiles light up. Ready?",
+  "watch": "Watch the pattern…",
+  "turn": "Your turn: tap the tiles.",
+  "nice": "Nice! On to level {n}.",
+  "miss": "So close. The outlined tiles were the pattern.",
+  "end": "That was the warm-up. In the app, every lesson adapts to you.",
+  "start": "Play",
+  "next": "Next level",
+  "again": "Try again",
+  "level": "Level {n}",
+  "title": "Pensa: Brain Workout | Daily Memory & Focus Training",
+  "desc": "Pensa is a 5-minute daily brain workout for Android: memory, attention and reasoning exercises that adapt to you, plus real facts worth keeping. Free, no ads."
+ },
+ "it": {
+  "eyebrow": "Beta chiusa · Android",
+  "h1": "Prima la tua <em>testa</em>.",
+  "lead": "L'IA e il telefono rispondono a tutto al posto tuo. Pensa ti dà pochi minuti al giorno in cui a pensare sei tu: brevi esercizi che si adattano a te e fatti veri che vale la pena ricordare.",
+  "chip1": "5 minuti al giorno",
+  "chip2": "6 lingue",
+  "chip3": "Allenamento quotidiano gratis, senza pubblicità",
+  "cta": "Partecipa alla beta",
+  "try": "Prova un esercizio",
+  "steps": "Due passi: entra nel <a href=\"https://groups.google.com/g/pensa-app-testers\" target=\"_blank\" rel=\"noopener\">gruppo dei tester</a>, poi <a href=\"https://play.google.com/apps/testing/com.getpensa.app\" target=\"_blank\" rel=\"noopener\">scaricala da Google Play</a>.",
+  "note": "Un'app di allenamento, non un test medico.",
+  "privacy": "Informativa sulla privacy",
+  "terms": "Condizioni di vendita",
+  "del": "Elimina account",
+  "contact": "Contatti",
+  "intro": "Ricorda quali caselle si accendono. Via?",
+  "watch": "Guarda lo schema…",
+  "turn": "Tocca a te: tocca le caselle.",
+  "nice": "Ottimo! Si passa al livello {n}.",
+  "miss": "C'eri quasi. Le caselle con il bordo erano lo schema.",
+  "end": "Era solo il riscaldamento. Nell'app ogni lezione si adatta a te.",
+  "start": "Gioca",
+  "next": "Livello successivo",
+  "again": "Riprova",
+  "level": "Livello {n}",
+  "title": "Pensa: Allenamento Mentale | Esercizi di memoria ogni giorno",
+  "desc": "Pensa è un allenamento mentale di 5 minuti al giorno per Android: giochi di memoria, attenzione e ragionamento che si adattano a te. Gratis, senza pubblicità."
+ },
+ "de": {
+  "eyebrow": "Geschlossene Beta · Android",
+  "h1": "Erst der eigene <em>Kopf</em>.",
+  "lead": "KI und Handy beantworten alles für dich. Pensa gibt dir ein paar Minuten am Tag, in denen du selbst denkst: kurze Übungen, die sich dir anpassen, und echte Fakten, die sich zu merken lohnen.",
+  "chip1": "5 Minuten am Tag",
+  "chip2": "6 Sprachen",
+  "chip3": "Tägliches Training gratis, keine Werbung",
+  "cta": "Beta beitreten",
+  "try": "Probier eine Übung",
+  "steps": "Zwei Schritte: der <a href=\"https://groups.google.com/g/pensa-app-testers\" target=\"_blank\" rel=\"noopener\">Testergruppe</a> beitreten, dann <a href=\"https://play.google.com/apps/testing/com.getpensa.app\" target=\"_blank\" rel=\"noopener\">bei Google Play laden</a>.",
+  "note": "Eine Trainings-App, kein medizinischer Test.",
+  "privacy": "Datenschutz",
+  "terms": "Verkaufsbedingungen",
+  "del": "Konto löschen",
+  "contact": "Kontakt",
+  "intro": "Merk dir, welche Felder aufleuchten. Bereit?",
+  "watch": "Merk dir das Muster…",
+  "turn": "Du bist dran: tippe die Felder an.",
+  "nice": "Stark! Weiter mit Level {n}.",
+  "miss": "Knapp daneben. Die umrandeten Felder waren das Muster.",
+  "end": "Das war das Aufwärmen. In der App passt sich jede Lektion dir an.",
+  "start": "Spielen",
+  "next": "Nächstes Level",
+  "again": "Nochmal",
+  "level": "Level {n}",
+  "title": "Pensa: Gehirntraining | Gedächtnis und Konzentration täglich",
+  "desc": "Pensa ist dein tägliches Gehirnjogging in 5 Minuten für Android: Übungen für Gedächtnis, Konzentration und logisches Denken. Kostenlos, ohne Werbung."
+ }
+}
+</script>
 <script>
-const T = {
-  en: { eyebrow: "Closed beta · Android", h1: "Your own <em>head</em> first.",
-    lead: "AI and your phone answer everything for you. Pensa gives you a few minutes a day where you do the thinking: short exercises that adapt to you, and real facts worth keeping.",
-    chip1: "5 minutes a day", chip2: "6 languages", chip3: "Free daily training, no ads", cta: "Join the beta", try: "Try a puzzle",
-    steps: 'Two steps: join the <a href="https://groups.google.com/g/pensa-app-testers" target="_blank" rel="noopener">testers group</a>, then <a href="https://play.google.com/apps/testing/com.getpensa.app" target="_blank" rel="noopener">get it on Google Play</a>.',
-    note: "A training app, not a medical test.", privacy: "Privacy policy", terms: "Terms of sale", del: "Delete account", contact: "Contact",
-    intro: "Remember which tiles light up. Ready?", watch: "Watch the pattern…", turn: "Your turn: tap the tiles.", nice: "Nice! On to level {n}.",
-    miss: "So close. The outlined tiles were the pattern.", end: "That was the warm-up. In the app, every lesson adapts to you.",
-    start: "Play", next: "Next level", again: "Try again", level: "Level {n}" },
-  it: { eyebrow: "Beta chiusa · Android", h1: "Prima la tua <em>testa</em>.",
-    lead: "L'IA e il telefono rispondono a tutto al posto tuo. Pensa ti dà pochi minuti al giorno in cui a pensare sei tu: brevi esercizi che si adattano a te e fatti veri che vale la pena ricordare.",
-    chip1: "5 minuti al giorno", chip2: "6 lingue", chip3: "Allenamento quotidiano gratis, senza pubblicità", cta: "Partecipa alla beta", try: "Prova un esercizio",
-    steps: 'Due passi: entra nel <a href="https://groups.google.com/g/pensa-app-testers" target="_blank" rel="noopener">gruppo dei tester</a>, poi <a href="https://play.google.com/apps/testing/com.getpensa.app" target="_blank" rel="noopener">scaricala da Google Play</a>.',
-    note: "Un'app di allenamento, non un test medico.", privacy: "Informativa sulla privacy", terms: "Condizioni di vendita", del: "Elimina account", contact: "Contatti",
-    intro: "Ricorda quali caselle si accendono. Via?", watch: "Guarda lo schema…", turn: "Tocca a te: tocca le caselle.", nice: "Ottimo! Si passa al livello {n}.",
-    miss: "C'eri quasi. Le caselle con il bordo erano lo schema.", end: "Era solo il riscaldamento. Nell'app ogni lezione si adatta a te.",
-    start: "Gioca", next: "Livello successivo", again: "Riprova", level: "Livello {n}" },
-  de: { eyebrow: "Geschlossene Beta · Android", h1: "Erst der eigene <em>Kopf</em>.",
-    lead: "KI und Handy beantworten alles für dich. Pensa gibt dir ein paar Minuten am Tag, in denen du selbst denkst: kurze Übungen, die sich dir anpassen, und echte Fakten, die sich zu merken lohnen.",
-    chip1: "5 Minuten am Tag", chip2: "6 Sprachen", chip3: "Tägliches Training gratis, keine Werbung", cta: "Beta beitreten", try: "Probier eine Übung",
-    steps: 'Zwei Schritte: der <a href="https://groups.google.com/g/pensa-app-testers" target="_blank" rel="noopener">Testergruppe</a> beitreten, dann <a href="https://play.google.com/apps/testing/com.getpensa.app" target="_blank" rel="noopener">bei Google Play laden</a>.',
-    note: "Eine Trainings-App, kein medizinischer Test.", privacy: "Datenschutz", terms: "Verkaufsbedingungen", del: "Konto löschen", contact: "Kontakt",
-    intro: "Merk dir, welche Felder aufleuchten. Bereit?", watch: "Merk dir das Muster…", turn: "Du bist dran: tippe die Felder an.", nice: "Stark! Weiter mit Level {n}.",
-    miss: "Knapp daneben. Die umrandeten Felder waren das Muster.", end: "Das war das Aufwärmen. In der App passt sich jede Lektion dir an.",
-    start: "Spielen", next: "Nächstes Level", again: "Nochmal", level: "Level {n}" },
-};
 const $ = (id) => document.getElementById(id);
+const T = JSON.parse($("strings").textContent);
 const quiet = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let lang = "en", level = 1, phase = "idle", pattern = new Set(), found = 0, say = "intro", go = "start";
 
@@ -217,7 +296,7 @@ function render() {  // every visible string comes from T, so switching language
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-t]").forEach((el) => { el.innerHTML = t(el.dataset.t); });
   document.querySelectorAll("[data-anchor]").forEach((a) => { a.href = a.getAttribute("href").split("#")[0] + "#" + lang; });
-  document.querySelectorAll(".langs button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  document.querySelectorAll(".langs a").forEach((a) => a.setAttribute("aria-current", a.dataset.lang === lang));
   $("bubble").textContent = t(say, level);
   $("go").textContent = t(go);
   $("lvl").textContent = t("level", level);
@@ -270,9 +349,8 @@ function celebrate() {
 }
 
 $("go").onclick = round;
-document.querySelectorAll(".langs button").forEach((b) => (b.onclick = () => setLang(b.dataset.lang)));
 board();
-setLang(new URLSearchParams(location.search).get("lang") || navigator.language.slice(0, 2));
+setLang(document.documentElement.lang);
 </script>
 </body>
 </html>

@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pensa: Gehirntraining | Gedächtnis und Konzentration täglich</title>
+<meta name="description" content="Pensa ist dein tägliches Gehirnjogging in 5 Minuten für Android: Übungen für Gedächtnis, Konzentration und logisches Denken. Kostenlos, ohne Werbung.">
+<meta name="theme-color" content="#5046E5">
+<link rel="canonical" href="https://pensaapp.com/de/">
+<link rel="alternate" hreflang="en" href="https://pensaapp.com/">
+<link rel="alternate" hreflang="it" href="https://pensaapp.com/it/">
+<link rel="alternate" hreflang="de" href="https://pensaapp.com/de/">
+<link rel="alternate" hreflang="x-default" href="https://pensaapp.com/">
+<link rel="icon" type="image/png" href="/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pensa">
+<meta property="og:title" content="Pensa: Gehirntraining | Gedächtnis und Konzentration täglich">
+<meta property="og:description" content="Pensa ist dein tägliches Gehirnjogging in 5 Minuten für Android: Übungen für Gedächtnis, Konzentration und logisches Denken. Kostenlos, ohne Werbung.">
+<meta property="og:url" content="https://pensaapp.com/de/">
+<meta property="og:image" content="https://pensaapp.com/og.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Pensa","operatingSystem":"Android","applicationCategory":"EducationalApplication","description":"Pensa ist dein tägliches Gehirnjogging in 5 Minuten für Android: Übungen für Gedächtnis, Konzentration und logisches Denken. Kostenlos, ohne Werbung.","url":"https://pensaapp.com/de/","image":"https://pensaapp.com/icon.png","inLanguage":["en","it","es","fr","de","pt"],"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+<style>
+  /* Self-hosted: no request leaves this site, so no cookie or font banner is needed. */
+  @font-face { font-family: Nunito; src: url("/nunito.ttf") format("truetype"); font-weight: 200 1000; font-display: swap; }
+  :root { --p: #5046E5; --p-lip: #3A31B8; --p-soft: #EEEDFD; --ok: #0C8069; --ok-lip: #08604F; --miss: #F0A020; --miss-lip: #8A5600;
+          --text: #1F2333; --muted: #6B7090; --line: #E5E7EF; --line-lip: #D3D6E2; --bg: #FBFAFF; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; font: 500 17px/1.5 Nunito, system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--text); background: var(--bg); overflow-x: hidden; }
+  a { color: inherit; }
+
+  /* Background: drifting colour fields and a faint knowledge network. */
+  .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; animation: drift 18s ease-in-out infinite alternate; }
+  .b1 { width: 46vw; height: 46vw; left: -12vw; top: -14vw; background: #D9D4FF; }
+  .b2 { width: 38vw; height: 38vw; right: -8vw; top: 10vh; background: #C9F0E6; animation-delay: -6s; }
+  .b3 { width: 34vw; height: 34vw; left: 30vw; bottom: -20vw; background: #FFE3B8; animation-delay: -11s; }
+  @keyframes drift { to { transform: translate(4vw, 3vh) scale(1.12); } }
+  .net { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .net line { stroke: var(--p); stroke-width: 1.2; opacity: .16; stroke-dasharray: 6 10; animation: flow 3.2s linear infinite; }
+  .net circle { fill: var(--p); opacity: .28; animation: pulse 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .net circle:nth-child(odd) { animation-delay: -1.4s; }
+  @keyframes flow { to { stroke-dashoffset: -32; } }
+  @keyframes pulse { 50% { transform: scale(1.7); opacity: .12; } }
+
+  .page { min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .brand { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 26px; letter-spacing: -.5px; text-decoration: none; }
+  .brand svg { width: 44px; height: 44px; }
+  .langs { display: flex; gap: 4px; background: #fff; border: 2px solid var(--line); border-radius: 999px; padding: 4px; }
+  .langs a { text-decoration: none; font: 800 13px Nunito, sans-serif; color: var(--muted); background: none; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+  .langs a[aria-current="true"] { background: var(--p-soft); color: var(--p); }
+
+  main { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; padding: 8px 0 24px; }
+  .copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+  .copy > :nth-child(2) { animation-delay: .08s; } .copy > :nth-child(3) { animation-delay: .16s; }
+  .copy > :nth-child(4) { animation-delay: .24s; } .copy > :nth-child(5) { animation-delay: .32s; } .copy > :nth-child(6) { animation-delay: .4s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+  .eyebrow { display: inline-flex; gap: 8px; align-items: center; font-weight: 800; font-size: 13px; letter-spacing: .8px; text-transform: uppercase; color: var(--p);
+             background: #fff; border: 2px solid var(--line); border-radius: 999px; padding: 6px 14px; }
+  .eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); animation: pulse 2s ease-in-out infinite; }
+  h1 { font-size: clamp(44px, 6.4vw, 84px); line-height: .98; font-weight: 900; letter-spacing: -2px; margin: 18px 0 16px; }
+  h1 em { font-style: normal; background: linear-gradient(100deg, var(--p), #9B6CF6 60%, #E0669B); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--muted); max-width: 30em; margin: 0 0 24px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 26px; padding: 0; list-style: none; }
+  .chips li { font-weight: 800; font-size: 14px; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 8px 12px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn { display: inline-block; font: 900 16px Nunito, sans-serif; letter-spacing: .6px; text-transform: uppercase; text-decoration: none; text-align: center; cursor: pointer;
+         color: #fff; background: var(--p); border: 0; border-radius: 16px; padding: 15px 26px; box-shadow: 0 5px 0 var(--p-lip); transition: transform .08s, box-shadow .08s; }
+  .btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--p-lip); }
+  .btn.ghost { color: var(--p); background: #fff; box-shadow: 0 5px 0 var(--line-lip); border: 2px solid var(--line); padding: 13px 22px; }
+  .btn.ghost:active { box-shadow: 0 1px 0 var(--line-lip); }
+  .steps { font-size: 14px; color: var(--muted); margin: 14px 0 0; }
+  .steps a { color: var(--p); font-weight: 800; }
+  .note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+
+  /* The phone: a playable copy of the app's pattern exercise. */
+  .stage { display: grid; place-items: center; animation: rise .9s .2s cubic-bezier(.2,.8,.2,1) both; }
+  .phone { width: min(360px, 88vw); background: #fff; border-radius: 44px; padding: 18px 18px 20px; border: 2px solid var(--line);
+           box-shadow: 0 10px 0 var(--line-lip), 0 40px 80px -20px rgba(80,70,229,.45); animation: float 6s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-10px) rotate(-.6deg); } }
+  .phone.win { animation: float 6s ease-in-out infinite, glow .9s ease-out; }
+  @keyframes glow { 30% { box-shadow: 0 10px 0 var(--ok-lip), 0 0 0 10px rgba(12,128,105,.18), 0 40px 80px -20px rgba(12,128,105,.6); } }
+  .bar { display: flex; align-items: center; gap: 10px; }
+  .track { flex: 1; height: 12px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .fill { height: 100%; width: 0; border-radius: 99px; background: var(--ok); transition: width .5s cubic-bezier(.2,.8,.2,1); }
+  .lvl { font-weight: 900; font-size: 13px; color: var(--p); background: var(--p-soft); border-radius: 99px; padding: 4px 10px; white-space: nowrap; }
+  .coach { display: flex; align-items: center; gap: 10px; margin: 14px 0 12px; min-height: 76px; }
+  .lumi { width: 76px; height: 76px; flex: none; animation: bob 3s ease-in-out infinite; }
+  .lumi.jump { animation: jump .6s ease-out; }
+  @keyframes bob { 50% { transform: translateY(-4px); } }
+  @keyframes jump { 35% { transform: translateY(-16px) rotate(-6deg); } 70% { transform: translateY(0) rotate(3deg); } }
+  .lumi .eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
+  @keyframes blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(.1); } }
+  .lumi .bulb { animation: pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .bubble { flex: 1; font-weight: 800; font-size: 15px; line-height: 1.3; border: 2px solid var(--line); border-radius: 18px; padding: 10px 14px; }
+  .grid { display: grid; gap: 8px; aspect-ratio: 1; }
+  .cell { border: 0; border-radius: 14px; background: var(--p-soft); box-shadow: 0 4px 0 #D9D6F7; cursor: pointer; padding: 0;
+          transition: background .18s, box-shadow .18s, transform .1s; -webkit-tap-highlight-color: transparent; }
+  .cell:disabled { cursor: default; }
+  .cell:not(:disabled):active { transform: translateY(3px); box-shadow: 0 1px 0 #D9D6F7; }
+  .cell.lit { background: var(--p); box-shadow: 0 4px 0 var(--p-lip); animation: pop .32s cubic-bezier(.3,1.6,.5,1) both; }
+  .cell.ok { background: var(--ok); box-shadow: 0 4px 0 var(--ok-lip); animation: pop .28s cubic-bezier(.3,1.6,.5,1); }
+  .cell.miss { background: var(--miss); box-shadow: 0 4px 0 var(--miss-lip); animation: shake .3s; }
+  .cell.was { background: #fff; box-shadow: inset 0 0 0 3px var(--p), 0 4px 0 #D9D6F7; }
+  @keyframes pop { from { transform: scale(.7); } }
+  @keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+  .phone .btn { width: 100%; margin-top: 16px; }
+
+  footer { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center; padding: 14px 0 18px; font-size: 13px; color: var(--muted); }
+  footer a { text-decoration: none; } footer a:hover { color: var(--p); }
+
+  @media (max-width: 860px) {
+    main { grid-template-columns: 1fr; gap: 28px; text-align: center; padding-top: 0; }
+    .lead { margin-inline: auto; } .chips, .cta { justify-content: center; }
+    h1 { letter-spacing: -1px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <svg class="net" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <line x1="90" y1="610" x2="260" y2="700"/><line x1="260" y1="700" x2="470" y2="640"/><line x1="470" y1="640" x2="560" y2="740"/>
+    <line x1="700" y1="90" x2="880" y2="60"/><line x1="880" y1="60" x2="1060" y2="130"/><line x1="1060" y1="130" x2="1130" y2="300"/>
+    <line x1="1130" y1="300" x2="1090" y2="520"/><line x1="90" y1="610" x2="60" y2="420"/>
+    <circle cx="90" cy="610" r="6"/><circle cx="260" cy="700" r="5"/><circle cx="470" cy="640" r="7"/><circle cx="560" cy="740" r="4"/>
+    <circle cx="700" cy="90" r="5"/><circle cx="880" cy="60" r="7"/><circle cx="1060" cy="130" r="5"/><circle cx="1130" cy="300" r="6"/>
+    <circle cx="1090" cy="520" r="5"/><circle cx="60" cy="420" r="5"/>
+  </svg>
+</div>
+
+<!-- Lumi: the same shapes and colours as the app's mascot. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lumi" viewBox="18 16 72 74">
+    <path d="M54 38.6 56.7 28.2" stroke="#3A31B8" stroke-width="2.4" stroke-linecap="round"/>
+    <circle class="bulb" cx="56.7" cy="26.8" r="5.8" fill="#FFB300" opacity=".35"/><circle cx="56.7" cy="26.8" r="3.4" fill="#FFB300"/>
+    <g transform="rotate(25 32 60.6)"><ellipse cx="32" cy="67.7" rx="3.7" ry="7.2" fill="#3A31B8"/><ellipse cx="32" cy="66.3" rx="3.7" ry="7.2" fill="#5046E5"/></g>
+    <g transform="rotate(-25 76 60.6)"><ellipse cx="76" cy="67.7" rx="3.7" ry="7.2" fill="#3A31B8"/><ellipse cx="76" cy="66.3" rx="3.7" ry="7.2" fill="#5046E5"/></g>
+    <circle cx="54" cy="61.5" r="23.1" fill="#3A31B8"/><circle cx="54" cy="59.4" r="23.1" fill="#5046E5"/>
+    <ellipse cx="54" cy="69.8" rx="12.7" ry="9.3" fill="#fff" opacity=".18"/>
+    <circle cx="40.6" cy="63.6" r="3" fill="#FF8FB1" opacity=".55"/><circle cx="67.4" cy="63.6" r="3" fill="#FF8FB1" opacity=".55"/>
+    <g class="eyes">
+      <circle cx="45.7" cy="56.7" r="5.6" fill="#fff"/><circle cx="45.7" cy="57.2" r="3" fill="#1F2333"/><circle cx="46.7" cy="56.1" r="1" fill="#fff"/>
+      <circle cx="62.3" cy="56.7" r="5.6" fill="#fff"/><circle cx="62.3" cy="57.2" r="3" fill="#1F2333"/><circle cx="63.3" cy="56.1" r="1" fill="#fff"/>
+    </g>
+    <path d="M58.8 65.9a5.1 3.5 0 0 1-9.6 0" fill="none" stroke="#1F2333" stroke-width="1.85" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<div class="page">
+  <header>
+    <a class="brand" href="https://pensaapp.com/de/"><svg aria-hidden="true"><use href="#lumi"/></svg>Pensa</a>
+    <div class="langs" role="group" aria-label="Language">
+      <a data-lang="en" href="/">EN</a><a data-lang="it" href="/it/">IT</a><a data-lang="de" href="/de/">DE</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="copy">
+      <span class="eyebrow"><i></i><span data-t="eyebrow">Geschlossene Beta · Android</span></span>
+      <h1 data-t="h1">Erst der eigene <em>Kopf</em>.</h1>
+      <p class="lead" data-t="lead">KI und Handy beantworten alles für dich. Pensa gibt dir ein paar Minuten am Tag, in denen du selbst denkst: kurze Übungen, die sich dir anpassen, und echte Fakten, die sich zu merken lohnen.</p>
+      <ul class="chips"><li data-t="chip1">5 Minuten am Tag</li><li data-t="chip2">6 Sprachen</li><li data-t="chip3">Tägliches Training gratis, keine Werbung</li></ul>
+      <div class="cta">
+        <a class="btn" href="https://groups.google.com/g/pensa-app-testers" target="_blank" rel="noopener" data-t="cta">Beta beitreten</a>
+        <a class="btn ghost" href="#game" data-t="try">Probier eine Übung</a>
+      </div>
+      <div>
+        <p class="steps" data-t="steps">Zwei Schritte: der <a href="https://groups.google.com/g/pensa-app-testers" target="_blank" rel="noopener">Testergruppe</a> beitreten, dann <a href="https://play.google.com/apps/testing/com.getpensa.app" target="_blank" rel="noopener">bei Google Play laden</a>.</p>
+        <p class="note" data-t="note">Eine Trainings-App, kein medizinischer Test.</p>
+      </div>
+    </section>
+
+    <section class="stage" id="game" aria-label="Pattern demo">
+      <div class="phone" id="phone">
+        <div class="bar"><div class="track"><div class="fill" id="fill"></div></div><span class="lvl" id="lvl"></span></div>
+        <div class="coach">
+          <svg class="lumi" id="coach" aria-hidden="true"><use href="#lumi"/></svg>
+          <div class="bubble" id="bubble" aria-live="polite"></div>
+        </div>
+        <div class="grid" id="grid"></div>
+        <button class="btn" id="go"></button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="/privacy-policy.html" data-t="privacy" data-anchor>Datenschutz</a>
+    <a href="/terms-of-sale.html" data-t="terms" data-anchor>Verkaufsbedingungen</a>
+    <a href="/delete-account.html" data-t="del" data-anchor>Konto löschen</a>
+    <a href="mailto:abhishekchauhan150@gmail.com" data-t="contact">Kontakt</a>
+  </footer>
+</div>
+
+<script type="application/json" id="strings">
+{
+ "en": {
+  "eyebrow": "Closed beta · Android",
+  "h1": "Your own <em>head</em> first.",
+  "lead": "AI and your phone answer everything for you. Pensa gives you a few minutes a day where you do the thinking: short exercises that adapt to you, and real facts worth keeping.",
+  "chip1": "5 minutes a day",
+  "chip2": "6 languages",
+  "chip3": "Free daily training, no ads",
+  "cta": "Join the beta",
+  "try": "Try a puzzle",
+  "steps": "Two steps: join the <a href=\"https://groups.google.com/g/pensa-app-testers\" target=\"_blank\" rel=\"noopener\">testers group</a>, then <a href=\"https://play.google.com/apps/testing/com.getpensa.app\" target=\"_blank\" rel=\"noopener\">get it on Google Play</a>.",
+  "note": "A training app, not a medical test.",
+  "privacy": "Privacy policy",
+  "terms": "Terms of sale",
+  "del": "Delete account",
+  "contact": "Contact",
+  "intro": "Remember which tiles light up. Ready?",
+  "watch": "Watch the pattern…",
+  "turn": "Your turn: tap the tiles.",
+  "nice": "Nice! On to level {n}.",
+  "miss": "So close. The outlined tiles were the pattern.",
+  "end": "That was the warm-up. In the app, every lesson adapts to you.",
+  "start": "Play",
+  "next": "Next level",
+  "again": "Try again",
+  "level": "Level {n}",
+  "title": "Pensa: Brain Workout | Daily Memory & Focus Training",
+  "desc": "Pensa is a 5-minute daily brain workout for Android: memory, attention and reasoning exercises that adapt to you, plus real facts worth keeping. Free, no ads."
+ },
+ "it": {
+  "eyebrow": "Beta chiusa · Android",
+  "h1": "Prima la tua <em>testa</em>.",
+  "lead": "L'IA e il telefono rispondono a tutto al posto tuo. Pensa ti dà pochi minuti al giorno in cui a pensare sei tu: brevi esercizi che si adattano a te e fatti veri che vale la pena ricordare.",
+  "chip1": "5 minuti al giorno",
+  "chip2": "6 lingue",
+  "chip3": "Allenamento quotidiano gratis, senza pubblicità",
+  "cta": "Partecipa alla beta",
+  "try": "Prova un esercizio",
+  "steps": "Due passi: entra nel <a href=\"https://groups.google.com/g/pensa-app-testers\" target=\"_blank\" rel=\"noopener\">gruppo dei tester</a>, poi <a href=\"https://play.google.com/apps/testing/com.getpensa.app\" target=\"_blank\" rel=\"noopener\">scaricala da Google Play</a>.",
+  "note": "Un'app di allenamento, non un test medico.",
+  "privacy": "Informativa sulla privacy",
+  "terms": "Condizioni di vendita",
+  "del": "Elimina account",
+  "contact": "Contatti",
+  "intro": "Ricorda quali caselle si accendono. Via?",
+  "watch": "Guarda lo schema…",
+  "turn": "Tocca a te: tocca le caselle.",
+  "nice": "Ottimo! Si passa al livello {n}.",
+  "miss": "C'eri quasi. Le caselle con il bordo erano lo schema.",
+  "end": "Era solo il riscaldamento. Nell'app ogni lezione si adatta a te.",
+  "start": "Gioca",
+  "next": "Livello successivo",
+  "again": "Riprova",
+  "level": "Livello {n}",
+  "title": "Pensa: Allenamento Mentale | Esercizi di memoria ogni giorno",
+  "desc": "Pensa è un allenamento mentale di 5 minuti al giorno per Android: giochi di memoria, attenzione e ragionamento che si adattano a te. Gratis, senza pubblicità."
+ },
+ "de": {
+  "eyebrow": "Geschlossene Beta · Android",
+  "h1": "Erst der eigene <em>Kopf</em>.",
+  "lead": "KI und Handy beantworten alles für dich. Pensa gibt dir ein paar Minuten am Tag, in denen du selbst denkst: kurze Übungen, die sich dir anpassen, und echte Fakten, die sich zu merken lohnen.",
+  "chip1": "5 Minuten am Tag",
+  "chip2": "6 Sprachen",
+  "chip3": "Tägliches Training gratis, keine Werbung",
+  "cta": "Beta beitreten",
+  "try": "Probier eine Übung",
+  "steps": "Zwei Schritte: der <a href=\"https://groups.google.com/g/pensa-app-testers\" target=\"_blank\" rel=\"noopener\">Testergruppe</a> beitreten, dann <a href=\"https://play.google.com/apps/testing/com.getpensa.app\" target=\"_blank\" rel=\"noopener\">bei Google Play laden</a>.",
+  "note": "Eine Trainings-App, kein medizinischer Test.",
+  "privacy": "Datenschutz",
+  "terms": "Verkaufsbedingungen",
+  "del": "Konto löschen",
+  "contact": "Kontakt",
+  "intro": "Merk dir, welche Felder aufleuchten. Bereit?",
+  "watch": "Merk dir das Muster…",
+  "turn": "Du bist dran: tippe die Felder an.",
+  "nice": "Stark! Weiter mit Level {n}.",
+  "miss": "Knapp daneben. Die umrandeten Felder waren das Muster.",
+  "end": "Das war das Aufwärmen. In der App passt sich jede Lektion dir an.",
+  "start": "Spielen",
+  "next": "Nächstes Level",
+  "again": "Nochmal",
+  "level": "Level {n}",
+  "title": "Pensa: Gehirntraining | Gedächtnis und Konzentration täglich",
+  "desc": "Pensa ist dein tägliches Gehirnjogging in 5 Minuten für Android: Übungen für Gedächtnis, Konzentration und logisches Denken. Kostenlos, ohne Werbung."
+ }
+}
+</script>
+<script>
+const $ = (id) => document.getElementById(id);
+const T = JSON.parse($("strings").textContent);
+const quiet = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let lang = "en", level = 1, phase = "idle", pattern = new Set(), found = 0, say = "intro", go = "start";
+
+const t = (key, n) => T[lang][key].replace("{n}", n);
+function render() {  // every visible string comes from T, so switching language redraws the game text too
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach((el) => { el.innerHTML = t(el.dataset.t); });
+  document.querySelectorAll("[data-anchor]").forEach((a) => { a.href = a.getAttribute("href").split("#")[0] + "#" + lang; });
+  document.querySelectorAll(".langs a").forEach((a) => a.setAttribute("aria-current", a.dataset.lang === lang));
+  $("bubble").textContent = t(say, level);
+  $("go").textContent = t(go);
+  $("lvl").textContent = t("level", level);
+}
+function setLang(l) { lang = T[l] ? l : "en"; render(); }
+
+// Level n shows n + 2 tiles; the board grows from 4x4 to 5x5 once that gets crowded.
+const tiles = () => level + 2, side = () => (tiles() > 6 ? 5 : 4);
+function board() {
+  const g = $("grid"), n = side();
+  g.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+  g.replaceChildren(...Array.from({ length: n * n }, (_, i) => {
+    const b = document.createElement("button");
+    b.className = "cell"; b.disabled = true; b.setAttribute("aria-label", `${Math.floor(i / n) + 1}, ${i % n + 1}`);
+    b.onclick = () => tap(i, b);
+    return b;
+  }));
+  return [...g.children];
+}
+function round() {
+  phase = "show"; found = 0; say = "watch"; $("go").hidden = true; render();
+  const cells = board(), all = cells.map((_, i) => i);
+  pattern = new Set(all.sort(() => Math.random() - .5).slice(0, tiles()));
+  [...pattern].forEach((i, k) => setTimeout(() => cells[i].classList.add("lit"), quiet ? 0 : 90 * k));
+  setTimeout(() => {
+    cells.forEach((c) => { c.classList.remove("lit"); c.disabled = false; });
+    phase = "input"; say = "turn"; render();
+  }, 1100 + 260 * tiles());
+}
+function tap(i, cell) {
+  if (phase !== "input" || cell.classList.contains("ok")) return;
+  const cells = [...$("grid").children];
+  if (pattern.has(i)) {
+    cell.classList.add("ok");
+    if (++found < pattern.size) return;
+    level++; say = level > 5 ? "end" : "nice"; go = "next"; celebrate();
+  } else {  // mistakes are explained, never punished: show the pattern and offer the same level again
+    cell.classList.add("miss");
+    pattern.forEach((p) => cells[p].classList.contains("ok") || cells[p].classList.add("was"));
+    say = "miss"; go = "again";
+  }
+  phase = "idle"; cells.forEach((c) => (c.disabled = true));
+  $("fill").style.width = Math.min(100, (level - 1) * 20) + "%";
+  $("go").hidden = false; render();
+}
+function celebrate() {
+  for (const [id, cls] of [["coach", "jump"], ["phone", "win"]]) {
+    const el = $(id); el.classList.remove(cls); void el.getBoundingClientRect(); el.classList.add(cls);
+  }
+}
+
+$("go").onclick = round;
+board();
+setLang(document.documentElement.lang);
+</script>
+</body>
+</html>
