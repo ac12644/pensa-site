@@ -32,29 +32,50 @@
   body { margin: 0; font: 500 17px/1.5 Nunito, system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--text); background: var(--bg); overflow-x: hidden; }
   a { color: inherit; }
 
-  /* Background: drifting colour fields and a faint knowledge network. */
+  /* Background: drifting colour fields. */
   .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
   .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; animation: drift 18s ease-in-out infinite alternate; }
   .b1 { width: 46vw; height: 46vw; left: -12vw; top: -14vw; background: #D9D4FF; }
   .b2 { width: 38vw; height: 38vw; right: -8vw; top: 10vh; background: #C9F0E6; animation-delay: -6s; }
   .b3 { width: 34vw; height: 34vw; left: 30vw; bottom: -20vw; background: #FFE3B8; animation-delay: -11s; }
   @keyframes drift { to { transform: translate(4vw, 3vh) scale(1.12); } }
-  .net { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .net line { stroke: var(--p); stroke-width: 1.2; opacity: .16; stroke-dasharray: 6 10; animation: flow 3.2s linear infinite; }
-  .net circle { fill: var(--p); opacity: .28; animation: pulse 3s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-  .net circle:nth-child(odd) { animation-delay: -1.4s; }
   @keyframes flow { to { stroke-dashoffset: -32; } }
   @keyframes pulse { 50% { transform: scale(1.7); opacity: .12; } }
 
   .page { min-height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
   header { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
   .brand { display: flex; align-items: center; gap: 8px; font-weight: 900; font-size: 26px; letter-spacing: -.5px; text-decoration: none; }
-  .brand svg { width: 44px; height: 44px; }
+  .brand svg { width: 56px; height: 56px; overflow: visible; }
+  /* Header Lumi says hi: tilts, waves its right wing, smiles with closed eyes. Plays on load and on hover/tap. */
+  /* Mascot faces: every face is drawn in one SVG; data-mood picks which parts show. The coach is a clone of the header logo. */
+  .mascot .face, .mascot .wave, .mascot .wl { transform-box: view-box; }
+  .mascot .face { transform-origin: 54px 82px; transition: transform .3s; }
+  .mascot .wave { transform-origin: 74px 58px; }
+  .mascot .wl { transform-origin: 34px 58px; }
+  .mascot .f { opacity: 0; transition: opacity .12s; }
+  .mascot .pupils { transition: transform .12s ease-out; }
+  [data-mood="idle"] :is(.eyes, .m-smile),
+  [data-mood="watch"] :is(.eyes, .m-o),
+  [data-mood="turn"] :is(.eyes, .m-flat, .b-focus),
+  [data-mood="oops"] :is(.eyes, .m-wobble, .b-worry, .sweat),
+  :is([data-mood="happy"], [data-mood="end"]) .joy,
+  [data-mood="excited"] :is(.eyes, .m-open),
+  [data-mood="curious"] :is(.eyes, .m-smirk, .b-raise) { opacity: 1; }
+  .mascot[data-mood="excited"] .bulb { animation: pulse .7s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  /* Header Lumi says hi: tilts, waves its right wing, smiles with closed eyes. Plays on load and on hover/tap. */
+  .brand.hi .face { animation: tilt 1.8s ease-in-out; }
+  .brand.hi .wave { animation: wave 1.8s ease-in-out; }
+  .brand.hi .joy { animation: joy 1.8s; }
+  .brand.hi :is(.eyes, .m-smile) { animation: calm 1.8s; }
+  @keyframes tilt { 15%, 75% { transform: rotate(-7deg) translateY(-2px); } }
+  @keyframes wave { 12% { transform: rotate(-115deg); } 26%, 54% { transform: rotate(-140deg); } 40%, 68% { transform: rotate(-100deg); } 85% { transform: rotate(0); } }
+  @keyframes joy { 10%, 80% { opacity: 1; } }
+  @keyframes calm { 10%, 80% { opacity: 0; } }
   .langs { display: flex; gap: 4px; background: #fff; border: 2px solid var(--line); border-radius: 999px; padding: 4px; }
   .langs a { text-decoration: none; font: 800 13px Nunito, sans-serif; color: var(--muted); background: none; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; }
   .langs a[aria-current="true"] { background: var(--p-soft); color: var(--p); }
 
-  main { display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px; align-items: center; padding: 8px 0 24px; }
+  main { display: grid; grid-template-columns: 1fr 1.05fr; gap: 32px; align-items: center; padding: 8px 0 24px; }
   .copy > * { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
   .copy > :nth-child(2) { animation-delay: .08s; } .copy > :nth-child(3) { animation-delay: .16s; }
   .copy > :nth-child(4) { animation-delay: .24s; } .copy > :nth-child(5) { animation-delay: .32s; } .copy > :nth-child(6) { animation-delay: .4s; }
@@ -78,8 +99,23 @@
   .note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
 
   /* The phone: a playable copy of the app's pattern exercise. */
-  .stage { display: grid; place-items: center; animation: rise .9s .2s cubic-bezier(.2,.8,.2,1) both; }
-  .phone { width: min(360px, 88vw); background: #fff; border-radius: 44px; padding: 18px 18px 20px; border: 2px solid var(--line);
+  /* Behind the demo phone: a brain seen from above; connections on both halves light up, one per right tile. */
+  .stage { position: relative; }
+  .brainbox { position: absolute; left: 50%; top: 50%; width: 640px; transform: translate(-50%, -52%); z-index: -1; pointer-events: none; }
+  .brain { display: block; width: 100%; overflow: visible; filter: drop-shadow(0 18px 30px rgba(80,70,229,.18)); }
+  /* The halves are <use> copies, which page CSS can't style inside, so their colours are attributes on the paths. */
+  .brain line { stroke: var(--p); stroke-opacity: .14; stroke-width: 2; stroke-linecap: round; transition: stroke-opacity .4s, stroke-width .4s; }
+  .brain line.on { stroke-opacity: .8; stroke-width: 3.5; animation: draw .7s ease-out; }
+  .brain circle { fill: var(--p); fill-opacity: .25; transition: fill-opacity .4s, r .4s; }
+  .brain circle.on { fill-opacity: 1; r: 7px; filter: drop-shadow(0 0 5px rgba(80,70,229,.8)); }
+  .brain.burst line.on { animation: flash .9s ease-out; }
+  @keyframes draw { from { stroke-dasharray: 0 400; } to { stroke-dasharray: 400 0; } }
+  @keyframes flash { 30% { stroke: #9B6CF6; stroke-width: 6; stroke-opacity: 1; } }
+  .hint { flex-basis: 100%; margin: 14px 0 0; font-weight: 800; font-size: 14px; line-height: 1.35; color: var(--muted); }
+  .hint b { color: var(--p); }
+  @media (max-width: 640px) { .brainbox { position: static; transform: none; order: -2; width: 230px; } .hint { order: -1; margin: 4px 0 12px; } }
+  .stage { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; animation: rise .9s .2s cubic-bezier(.2,.8,.2,1) both; }
+  .phone { position: relative; width: min(330px, 88vw); flex: none; background: #fff; border-radius: 44px; padding: 18px 18px 20px; border: 2px solid var(--line);
            box-shadow: 0 10px 0 var(--line-lip), 0 40px 80px -20px rgba(80,70,229,.45); animation: float 6s ease-in-out infinite; }
   @keyframes float { 50% { transform: translateY(-10px) rotate(-.6deg); } }
   .phone.win { animation: float 6s ease-in-out infinite, glow .9s ease-out; }
@@ -91,6 +127,15 @@
   .coach { display: flex; align-items: center; gap: 10px; margin: 14px 0 12px; min-height: 76px; }
   .lumi { width: 76px; height: 76px; flex: none; animation: bob 3s ease-in-out infinite; }
   .lumi.jump { animation: jump .6s ease-out; }
+  .lumi.hop { animation: hop .3s ease-out; }
+  .lumi.shake { animation: shake .4s; }
+  .lumi.jump .wl { animation: flapL .6s; } .lumi.jump .wave { animation: flapR .6s; }
+  .lumi[data-mood="end"] .wl { animation: flapL 1s 3; } .lumi[data-mood="end"] .wave { animation: flapR 1s 3; }
+  .lumi[data-mood="turn"] .face { transform: rotate(4deg) translateY(1px); }
+  .lumi[data-mood="watch"] .bulb { animation-duration: .7s; }
+  @keyframes hop { 40% { transform: translateY(-7px); } }
+  @keyframes flapL { 30%, 70% { transform: rotate(70deg); } 50% { transform: rotate(35deg); } }
+  @keyframes flapR { 30%, 70% { transform: rotate(-70deg); } 50% { transform: rotate(-35deg); } }
   @keyframes bob { 50% { transform: translateY(-4px); } }
   @keyframes jump { 35% { transform: translateY(-16px) rotate(-6deg); } 70% { transform: translateY(0) rotate(3deg); } }
   .lumi .eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
@@ -109,6 +154,13 @@
   @keyframes pop { from { transform: scale(.7); } }
   @keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
   .phone .btn { width: 100%; margin-top: 16px; }
+  /* Self-playing demo on arrival: a ghost finger taps the pattern until the visitor presses Play. */
+  .phone.auto .grid { pointer-events: none; }
+  .finger { position: absolute; left: 0; top: 0; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; pointer-events: none;
+            background: rgba(31,35,51,.28); border: 3px solid #fff; box-shadow: 0 4px 12px rgba(31,35,51,.25); opacity: 0;
+            transition: transform .38s cubic-bezier(.3,.7,.3,1), opacity .25s, scale .1s; }
+  .phone.auto .finger.on { opacity: 1; }
+  .finger.press { scale: .75; }
 
   footer { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center; padding: 14px 0 18px; font-size: 13px; color: var(--muted); }
   footer a { text-decoration: none; } footer a:hover { color: var(--p); }
@@ -124,37 +176,43 @@
 <body>
 <div class="bg" aria-hidden="true">
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-  <svg class="net" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
-    <line x1="90" y1="610" x2="260" y2="700"/><line x1="260" y1="700" x2="470" y2="640"/><line x1="470" y1="640" x2="560" y2="740"/>
-    <line x1="700" y1="90" x2="880" y2="60"/><line x1="880" y1="60" x2="1060" y2="130"/><line x1="1060" y1="130" x2="1130" y2="300"/>
-    <line x1="1130" y1="300" x2="1090" y2="520"/><line x1="90" y1="610" x2="60" y2="420"/>
-    <circle cx="90" cy="610" r="6"/><circle cx="260" cy="700" r="5"/><circle cx="470" cy="640" r="7"/><circle cx="560" cy="740" r="4"/>
-    <circle cx="700" cy="90" r="5"/><circle cx="880" cy="60" r="7"/><circle cx="1060" cy="130" r="5"/><circle cx="1130" cy="300" r="6"/>
-    <circle cx="1090" cy="520" r="5"/><circle cx="60" cy="420" r="5"/>
-  </svg>
 </div>
 
-<!-- Lumi: the same shapes and colours as the app's mascot. -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="lumi" viewBox="18 16 72 74">
-    <path d="M54 38.6 56.7 28.2" stroke="#3A31B8" stroke-width="2.4" stroke-linecap="round"/>
-    <circle class="bulb" cx="56.7" cy="26.8" r="5.8" fill="#FFB300" opacity=".35"/><circle cx="56.7" cy="26.8" r="3.4" fill="#FFB300"/>
-    <g transform="rotate(25 32 60.6)"><ellipse cx="32" cy="67.7" rx="3.7" ry="7.2" fill="#3A31B8"/><ellipse cx="32" cy="66.3" rx="3.7" ry="7.2" fill="#5046E5"/></g>
-    <g transform="rotate(-25 76 60.6)"><ellipse cx="76" cy="67.7" rx="3.7" ry="7.2" fill="#3A31B8"/><ellipse cx="76" cy="66.3" rx="3.7" ry="7.2" fill="#5046E5"/></g>
-    <circle cx="54" cy="61.5" r="23.1" fill="#3A31B8"/><circle cx="54" cy="59.4" r="23.1" fill="#5046E5"/>
-    <ellipse cx="54" cy="69.8" rx="12.7" ry="9.3" fill="#fff" opacity=".18"/>
-    <circle cx="40.6" cy="63.6" r="3" fill="#FF8FB1" opacity=".55"/><circle cx="67.4" cy="63.6" r="3" fill="#FF8FB1" opacity=".55"/>
-    <g class="eyes">
-      <circle cx="45.7" cy="56.7" r="5.6" fill="#fff"/><circle cx="45.7" cy="57.2" r="3" fill="#1F2333"/><circle cx="46.7" cy="56.1" r="1" fill="#fff"/>
-      <circle cx="62.3" cy="56.7" r="5.6" fill="#fff"/><circle cx="62.3" cy="57.2" r="3" fill="#1F2333"/><circle cx="63.3" cy="56.1" r="1" fill="#fff"/>
-    </g>
-    <path d="M58.8 65.9a5.1 3.5 0 0 1-9.6 0" fill="none" stroke="#1F2333" stroke-width="1.85" stroke-linecap="round"/>
-  </symbol>
-</svg>
 
 <div class="page">
   <header>
-    <a class="brand" href="https://pensaapp.com/it/"><svg aria-hidden="true"><use href="#lumi"/></svg>Pensa</a>
+    <a class="brand" id="brand" href="https://pensaapp.com/it/"><svg class="mascot" data-mood="idle" viewBox="18 16 72 74" aria-hidden="true"><g class="face">
+      <path d="M54 38.6 56.7 28.2" stroke="#3A31B8" stroke-width="2.4" stroke-linecap="round"/>
+      <circle class="bulb" cx="56.7" cy="26.8" r="5.8" fill="#FFB300" opacity=".35"/><circle cx="56.7" cy="26.8" r="3.4" fill="#FFB300"/>
+      <g class="wl"><g transform="rotate(25 32 60.6)"><ellipse cx="32" cy="67.7" rx="3.7" ry="7.2" fill="#3A31B8"/><ellipse cx="32" cy="66.3" rx="3.7" ry="7.2" fill="#5046E5"/></g></g>
+      <g class="wave"><g transform="rotate(-25 76 60.6)"><ellipse cx="76" cy="67.7" rx="3.7" ry="7.2" fill="#3A31B8"/><ellipse cx="76" cy="66.3" rx="3.7" ry="7.2" fill="#5046E5"/></g></g>
+      <circle cx="54" cy="61.5" r="23.1" fill="#3A31B8"/><circle cx="54" cy="59.4" r="23.1" fill="#5046E5"/>
+      <ellipse cx="54" cy="69.8" rx="12.7" ry="9.3" fill="#fff" opacity=".18"/>
+      <circle cx="40.6" cy="63.6" r="3" fill="#FF8FB1" opacity=".55"/><circle cx="67.4" cy="63.6" r="3" fill="#FF8FB1" opacity=".55"/>
+      <g class="f eyes">
+        <circle cx="45.7" cy="56.7" r="5.6" fill="#fff"/><circle cx="62.3" cy="56.7" r="5.6" fill="#fff"/>
+        <g class="pupils"><circle cx="45.7" cy="57.2" r="3" fill="#1F2333"/><circle cx="46.7" cy="56.1" r="1" fill="#fff"/>
+        <circle cx="62.3" cy="57.2" r="3" fill="#1F2333"/><circle cx="63.3" cy="56.1" r="1" fill="#fff"/></g>
+      </g>
+      <g fill="none" stroke="#1F2333" stroke-width="1.85" stroke-linecap="round">
+        <path class="f m-smile" d="M58.8 65.9a5.1 3.5 0 0 1-9.6 0"/>
+        <ellipse class="f m-o" cx="54" cy="67" rx="2.4" ry="2.9" fill="#1F2333" stroke="none"/>
+        <path class="f m-flat" d="M50.6 66.4h6.8"/>
+        <path class="f m-smirk" d="M49.4 66.4q4.6 2.8 9.4-1.6"/>
+        <path class="f b-raise" d="M58.4 48.6q4-3 8.6-.8" stroke-width="2.2"/>
+        <path class="f m-wobble" d="M49 67.2q1.7-1.6 3.3 0t3.3 0t3.3 0"/>
+        <path class="f b-focus" d="M41 49.6l7.6 1M67 49.6l-7.6 1" stroke-width="2.2"/>
+        <path class="f b-worry" d="M41 50.6l7.6-2.6M67 50.6l-7.6-2.6" stroke-width="2.2"/>
+      </g>
+      <path class="f sweat" d="M74.5 39.5q3.4 5 0 6.8q-3.4-1.8 0-6.8z" fill="#7EC8F5"/>
+      <g class="f m-open"><path d="M48.6 64.6h10.8a5.4 5.6 0 0 1-10.8 0z" fill="#1F2333" stroke="#1F2333" stroke-width="1.6" stroke-linejoin="round"/>
+        <circle cx="40.6" cy="63.6" r="3.4" fill="#FF8FB1"/><circle cx="67.4" cy="63.6" r="3.4" fill="#FF8FB1"/></g>
+      <g class="f joy" fill="none" stroke="#1F2333" stroke-width="2.4" stroke-linecap="round">
+        <path d="M41.2 58.2q4.5-6 9 0M57.8 58.2q4.5-6 9 0"/>
+        <path d="M48.6 64.6h10.8a5.4 5.6 0 0 1-10.8 0z" fill="#1F2333" stroke-width="1.6" stroke-linejoin="round"/>
+        <circle cx="40.6" cy="63.6" r="3.4" fill="#FF8FB1" stroke="none"/><circle cx="67.4" cy="63.6" r="3.4" fill="#FF8FB1" stroke="none"/>
+      </g>
+    </g></svg>Pensa</a>
     <div class="langs" role="group" aria-label="Language">
       <a data-lang="en" href="/">EN</a><a data-lang="it" href="/it/">IT</a><a data-lang="de" href="/de/">DE</a>
     </div>
@@ -180,12 +238,24 @@
       <div class="phone" id="phone">
         <div class="bar"><div class="track"><div class="fill" id="fill"></div></div><span class="lvl" id="lvl"></span></div>
         <div class="coach">
-          <svg class="lumi" id="coach" aria-hidden="true"><use href="#lumi"/></svg>
+          <svg id="coach"></svg>
           <div class="bubble" id="bubble" aria-live="polite"></div>
         </div>
         <div class="grid" id="grid"></div>
         <button class="btn" id="go"></button>
+        <div class="finger" id="finger"></div>
       </div>
+      <div class="brainbox">
+        <svg class="brain" id="brain" viewBox="0 0 520 480" aria-hidden="true">
+          <defs><g id="half">
+            <path fill="#fff" stroke="#5046E5" stroke-opacity=".35" stroke-width="3" stroke-linejoin="round" d="M254 32C180 22 70 45 38 125C18 185 20 270 34 330C52 405 130 456 254 458C247 380 258 300 250 240C244 170 258 100 254 32Z"/>
+            <path fill="none" stroke="#5046E5" stroke-opacity=".22" stroke-width="2.4" stroke-linecap="round" d="M235 62C200 78 220 98 185 108C150 118 160 142 120 152C95 158 90 170 70 168M240 125C205 135 222 160 188 170C155 180 168 205 120 210C90 213 70 205 48 215M242 190C208 200 225 225 190 235C155 245 168 270 115 275C85 278 60 268 36 278M242 255C208 265 225 290 190 300C155 310 168 335 118 340C88 343 65 335 42 345M238 320C204 330 220 355 186 365C152 375 165 400 120 405C95 408 80 400 62 410M232 385C200 400 218 420 185 430C160 438 150 445 130 446"/>
+          </g></defs>
+          <use href="#half"/><use href="#half" transform="matrix(-1 0 0 1 520 0)"/>
+          <g id="links"></g><g id="nodes"></g>
+        </svg>
+      </div>
+      <p class="hint" data-t="brain">Come nell'app: ogni risposta giusta aggiunge un collegamento alla <b>tua rete di conoscenze</b>.</p>
     </section>
   </main>
 
@@ -219,6 +289,7 @@
   "turn": "Your turn: tap the tiles.",
   "nice": "Nice! On to level {n}.",
   "miss": "So close. The outlined tiles were the pattern.",
+  "brain": "Like in the app: every right answer adds a link to <b>your knowledge network</b>.",
   "end": "That was the warm-up. In the app, every lesson adapts to you.",
   "start": "Play",
   "next": "Next level",
@@ -247,6 +318,7 @@
   "turn": "Tocca a te: tocca le caselle.",
   "nice": "Ottimo! Si passa al livello {n}.",
   "miss": "C'eri quasi. Le caselle con il bordo erano lo schema.",
+  "brain": "Come nell'app: ogni risposta giusta aggiunge un collegamento alla <b>tua rete di conoscenze</b>.",
   "end": "Era solo il riscaldamento. Nell'app ogni lezione si adatta a te.",
   "start": "Gioca",
   "next": "Livello successivo",
@@ -275,6 +347,7 @@
   "turn": "Du bist dran: tippe die Felder an.",
   "nice": "Stark! Weiter mit Level {n}.",
   "miss": "Knapp daneben. Die umrandeten Felder waren das Muster.",
+  "brain": "Wie in der App: Jede richtige Antwort fügt <b>deinem Wissensnetz</b> eine Verbindung hinzu.",
   "end": "Das war das Aufwärmen. In der App passt sich jede Lektion dir an.",
   "start": "Spielen",
   "next": "Nächstes Level",
@@ -289,6 +362,38 @@
 const $ = (id) => document.getElementById(id);
 const T = JSON.parse($("strings").textContent);
 const quiet = matchMedia("(prefers-reduced-motion: reduce)").matches;
+// The game's Lumi is a copy of the header one, so both share every face.
+const coach = $("brand").querySelector("svg").cloneNode(true);
+coach.id = "coach"; coach.classList.add("lumi"); $("coach").replaceWith(coach);
+const mood = (m) => { coach.dataset.mood = m; };
+const kick = (el, cls) => { el.classList.remove(cls); void el.getBoundingClientRect(); el.classList.add(cls); };
+coach.addEventListener("animationend", (e) => { if (e.target === coach) coach.classList.remove("jump", "hop", "shake"); });  // back to bobbing
+// Points a Lumi's pupils at a screen position (at most 2.2 units inside the 5.6-unit eye).
+function look(svg, x, y) {
+  const r = svg.getBoundingClientRect();
+  const dx = x - (r.left + r.width / 2), dy = y - (r.top + r.height * .55), d = Math.hypot(dx, dy) || 1;
+  const k = Math.min(1, d / 200) * 2.2 / d;
+  svg.querySelector(".pupils").style.transform = `translate(${dx * k}px, ${dy * k}px)`;
+}
+const hi = () => { const b = $("brand"); if (!b.classList.contains("hi")) b.classList.add("hi"); };
+// The header Lumi's mouth reacts to the two main buttons (hover or keyboard focus); the hello wave finishes first.
+const logo = $("brand").querySelector("svg");
+let want = "idle";
+const face = (m) => { want = m; if (!$("brand").classList.contains("hi")) logo.dataset.mood = m; };
+$("brand").addEventListener("animationend", (e) => { if (e.animationName === "wave") { $("brand").classList.remove("hi"); logo.dataset.mood = want; } });
+[[".cta .btn:not(.ghost)", "excited"], [".cta .btn.ghost", "curious"]].forEach(([sel, m]) => {
+  const el = document.querySelector(sel);
+  ["pointerenter", "focus"].forEach((ev) => el.addEventListener(ev, () => face(m)));
+  ["pointerleave", "blur"].forEach((ev) => el.addEventListener(ev, () => face("idle")));
+});
+$("brand").addEventListener("mouseenter", hi);
+$("brand").addEventListener("touchstart", hi, { passive: true });
+setTimeout(hi, 700);
+// Both Lumis watch the pointer; the coach's eyes follow the tiles instead while they light up.
+if (!quiet) addEventListener("pointermove", (e) => {
+  look($("brand").querySelector("svg"), e.clientX, e.clientY);
+  if (coach.dataset.mood !== "watch") look(coach, e.clientX, e.clientY);
+});
 let lang = "en", level = 1, phase = "idle", pattern = new Set(), found = 0, say = "intro", go = "start";
 
 const t = (key, n) => T[lang][key].replace("{n}", n);
@@ -298,7 +403,7 @@ function render() {  // every visible string comes from T, so switching language
   document.querySelectorAll("[data-anchor]").forEach((a) => { a.href = a.getAttribute("href").split("#")[0] + "#" + lang; });
   document.querySelectorAll(".langs a").forEach((a) => a.setAttribute("aria-current", a.dataset.lang === lang));
   $("bubble").textContent = t(say, level);
-  $("go").textContent = t(go);
+  $("go").textContent = t(demo ? "start" : go);  // during the demo the button always says Play
   $("lvl").textContent = t("level", level);
 }
 function setLang(l) { lang = T[l] ? l : "en"; render(); }
@@ -316,39 +421,104 @@ function board() {
   }));
   return [...g.children];
 }
+let roundId = 0;
 function round() {
-  phase = "show"; found = 0; say = "watch"; $("go").hidden = true; render();
+  const id = ++roundId;  // a restart mid-round must not let the old round's timer unlock the new board
+  phase = "show"; found = 0; say = "watch"; $("go").hidden = !demo; mood("watch"); render();
   const cells = board(), all = cells.map((_, i) => i);
   pattern = new Set(all.sort(() => Math.random() - .5).slice(0, tiles()));
-  [...pattern].forEach((i, k) => setTimeout(() => cells[i].classList.add("lit"), quiet ? 0 : 90 * k));
+  [...pattern].forEach((i, k) => setTimeout(() => {
+    cells[i].classList.add("lit");
+    if (!quiet) { const c = cells[i].getBoundingClientRect(); look(coach, c.left + c.width / 2, c.top + c.height / 2); }
+  }, quiet ? 0 : 90 * k));
   setTimeout(() => {
+    if (id !== roundId) return;
     cells.forEach((c) => { c.classList.remove("lit"); c.disabled = false; });
-    phase = "input"; say = "turn"; render();
+    phase = "input"; say = "turn"; mood("turn"); render();
   }, 1100 + 260 * tiles());
 }
 function tap(i, cell) {
   if (phase !== "input" || cell.classList.contains("ok")) return;
   const cells = [...$("grid").children];
   if (pattern.has(i)) {
-    cell.classList.add("ok");
-    if (++found < pattern.size) return;
-    level++; say = level > 5 ? "end" : "nice"; go = "next"; celebrate();
+    cell.classList.add("ok"); connect();
+    if (++found < pattern.size) {  // a quick happy blink and hop, then back to concentrating
+      mood("happy"); kick(coach, "hop");
+      setTimeout(() => phase === "input" && mood("turn"), 380);
+      return;
+    }
+    level++; say = level > 5 ? "end" : "nice"; go = "next"; mood(level > 5 ? "end" : "happy"); celebrate();
   } else {  // mistakes are explained, never punished: show the pattern and offer the same level again
     cell.classList.add("miss");
     pattern.forEach((p) => cells[p].classList.contains("ok") || cells[p].classList.add("was"));
-    say = "miss"; go = "again";
+    say = "miss"; go = "again"; mood("oops"); kick(coach, "shake");
+    setTimeout(() => phase === "idle" && coach.dataset.mood === "oops" && mood("idle"), 1800);  // worried, briefly; never sad
   }
   phase = "idle"; cells.forEach((c) => (c.disabled = true));
   $("fill").style.width = Math.min(100, (level - 1) * 20) + "%";
   $("go").hidden = false; render();
 }
 function celebrate() {
-  for (const [id, cls] of [["coach", "jump"], ["phone", "win"]]) {
-    const el = $(id); el.classList.remove(cls); void el.getBoundingClientRect(); el.classList.add(cls);
-  }
+  kick(coach, "jump"); kick($("phone"), "win"); kick($("brain"), "burst");
 }
 
-$("go").onclick = round;
+// The brain behind the phone: nodes and links in the order they light up, so the network grows outward from the middle.
+// Nodes sit on the outer parts of both halves (the phone covers the middle); links alternate sides so both grow together.
+const left = [[70,110],[105,80],[55,170],[100,150],[45,240],[95,225],[55,310],[100,300],[80,380]];
+const N = [...left, ...left.map(([x, y]) => [520 - x, y])];
+const half = [[0,1],[0,3],[1,3],[2,3],[0,2],[2,5],[3,5],[4,5],[2,4],[4,7],[5,7],[6,7],[4,6],[6,8],[7,8]];
+const L = half.flatMap(([a, b]) => [[a, b], [a + 9, b + 9]]);
+function svgEl(tag, attrs) {
+  const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
+}
+L.forEach(([a, b]) => $("links").append(svgEl("line", { x1: N[a][0], y1: N[a][1], x2: N[b][0], y2: N[b][1] })));
+N.forEach(([x, y]) => $("nodes").append(svgEl("circle", { cx: x, cy: y, r: 5 })));
+let lit = 0;
+function connect() {  // one more link (and its two nodes) lights up
+  if (lit >= L.length) return;
+  $("links").children[lit].classList.add("on");
+  L[lit].forEach((n) => $("nodes").children[n].classList.add("on"));
+  lit++;
+}
+// On arrival the demo plays itself (levels 1-3, looping) so visitors see how it works; Play stops it and starts fresh.
+let demo = false;
+const sleep = (ms) => new Promise((ok) => setTimeout(ok, ms));
+function reset() {
+  level = 1; found = 0; phase = "idle"; say = "intro"; go = "start"; lit = 0; roundId++;
+  document.querySelectorAll("#brain .on").forEach((el) => el.classList.remove("on"));
+  $("fill").style.width = "0%"; mood("idle"); board(); render();
+}
+async function autoplay() {
+  demo = true; $("phone").classList.add("auto");
+  const finger = $("finger"), phone = $("phone");
+  while (demo) {
+    round();
+    while (demo && phase !== "input") await sleep(100);
+    const cells = [...$("grid").children];
+    for (const i of [...pattern]) {
+      if (!demo) return;
+      const c = cells[i].getBoundingClientRect(), p = phone.getBoundingClientRect();
+      const first = !finger.classList.contains("on");  // first move: jump into place unseen, then fade in
+      if (first) finger.style.transition = "none";
+      finger.style.transform = `translate(${c.left - p.left + c.width / 2}px, ${c.top - p.top + c.height / 2}px)`;
+      if (first) { void finger.offsetWidth; finger.style.transition = ""; finger.classList.add("on"); }
+      await sleep(450); if (!demo) return;
+      finger.classList.add("press"); tap(i, cells[i]); await sleep(130); finger.classList.remove("press");
+    }
+    await sleep(1800);
+    if (demo && level > 3) { reset(); await sleep(900); }
+  }
+}
+$("go").onclick = () => {
+  if (demo) { demo = false; $("phone").classList.remove("auto"); reset(); }
+  round();
+};
+if (!quiet) setTimeout(() => phase === "idle" && level === 1 && autoplay(), 1200);
+// The game's Lumi smiles at the Start button while it waits.
+$("go").addEventListener("pointerenter", () => coach.dataset.mood === "idle" && mood("excited"));
+$("go").addEventListener("pointerleave", () => coach.dataset.mood === "excited" && mood("idle"));
 board();
 setLang(document.documentElement.lang);
 </script>
